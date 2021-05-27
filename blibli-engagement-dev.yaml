@@ -1,7 +1,7 @@
 version: '3'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3.4.12'
     container_name: blibli-engagement-zookeper
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -10,7 +10,7 @@ services:
     networks:
       - blibli
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'bitnami/kafka:1.1.0'
     container_name: blibli-engagement-kafka
     ports:
       - '9092:9092'
@@ -21,6 +21,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      # change 52.187.23.103 to your vm public ip, if you only use it at local use localhost
       - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://52.187.23.103:9092,EXTERNAL://52.187.23.103:9093
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on: 
