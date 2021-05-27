@@ -63,8 +63,6 @@ services:
     environment:
       - REDIS_PASSWORD=rahasia123
     command: redis-server --requirepass rahasia123
-    volumes:
-      - 'blibli-engagement-redis-vol:/data'
   postgres:
     image: postgres:latest
     container_name: blibli-engagement-postgres
@@ -83,8 +81,6 @@ volumes:
     blibli-engagement-mongodb:
       driver: local
     blibli-engagement-elasticsearch:
-      driver: local
-    blibli-engagement-redis:
       driver: local
     blibli-engagement-postgres:
       driver: local
