@@ -65,17 +65,17 @@ services:
     command: redis-server --requirepass rahasia123
     volumes:
       - 'blibli-engagement-redis-vol:/data'
-    image: postgres:latest
   postgres:
+    image: postgres:latest
     container_name: blibli-engagement-postgres
     ports:
       - '5432:5432'
-    volumes:
-      - blibli-engagement-postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=ternakkode
       - POSTGRES_PASSWORD=rahasia123
       - POSTGRES_DB=blibli-enngagement-dev
+    volumes:
+      - blibli-engagement-postgres:/var/lib/postgresql/data
 networks:
     blibli:
       driver: bridge
