@@ -62,12 +62,12 @@ services:
       - '6379:6379'
     environment:
       - REDIS_PASSWORD=rahasia123
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass rahasia123
     volumes:
       - 'blibli-engagement-redis-vol:/data'
     image: postgres:latest
   postgres:
-    container-name: blibli-engagement-postgres
+    container_name: blibli-engagement-postgres
     ports:
       - '5432:5432'
     volumes:
