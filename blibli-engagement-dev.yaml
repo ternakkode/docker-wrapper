@@ -1,7 +1,7 @@
 version: '3'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3.4.12'
     container_name: blibli-engagement-zookeper
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -10,7 +10,7 @@ services:
     networks:
       - blibli
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'bitnami/kafka:1.1.0'
     container_name: blibli-engagement-kafka
     ports:
       - '9092:9092'
