@@ -50,45 +50,25 @@ services:
       - blibli-engagement-elasticsearch:/usr/share/elasticsearch/data
     networks:
       - blibli
-  redis-master:
-    image: "bitnami/redis"
-    container_name: blibli-engagement-redis-master
-    environment:
-      - REDIS_REPLICATION_MODE=master
-      - REDIS_PASSWORD=rahasia123
+  redis:
+    image: redis:latest
+    container_name: blibli-engagement-redis
     ports:
       - '6379:6379'
-    networks:
-      - blibli
-  redis-slave:
-    image: "bitnami/redis"
-    container_name: blibli-engagement-redis-slave
     environment:
-      - REDIS_REPLICATION_MODE=slave
-      - REDIS_MASTER_HOST=redis-redis-master
-      - REDIS_MASTER_PASSWORD=rahasia123
       - REDIS_PASSWORD=rahasia123
-    ports:
-      - '6379:6379'
     networks:
       - blibli
-    depends_on:
-      - redis-master
   redis-sentinel:
-    image: "bitnami/redis-sentinel"
+    image: 'bitnami/redis-sentinel:latest'
     container_name: blibli-engagement-redis-sentinel
+    environment:
+      - REDIS_MASTER_HOST=redis
+      - REDIS_MASTER_PASSWORD=rahasia123
     ports:
-      - '26379-26381:26379'
+      - '26379:26379'
     networks:
       - blibli
-    environment:
-      - REDIS_MASTER_SET=blibli-engagement-redis
-      - REDIS_MASTER_HOST=redis-master
-      - REDIS_MASTER_PASSWORD=rahasia123
-      - REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS=10000
-    depends_on:
-      - redis-master
-      - redis-slave
   postgres:
     image: postgres:latest
     container_name: blibli-engagement-postgres
