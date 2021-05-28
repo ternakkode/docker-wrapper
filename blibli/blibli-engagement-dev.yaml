@@ -1,7 +1,7 @@
 version: '3'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:3.4.12'
+    image: 'zookeeper:3.4.12'
     container_name: blibli-engagement-zookeper
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
@@ -10,7 +10,7 @@ services:
     networks:
       - blibli
   kafka:
-    image: 'bitnami/kafka:1.1.0'
+    image: 'wurstmeister/kafka:1.1.0'
     container_name: blibli-engagement-kafka
     ports:
       - '9092:9092'
@@ -19,6 +19,7 @@ services:
       - KAFKA_BROKER_ID=1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
       - KAFKA_ADVERTISED_LISTENERS=CLIENT://52.187.23.103:9092,EXTERNAL://52.187.23.103:9093
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
