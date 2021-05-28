@@ -31,7 +31,7 @@ services:
     networks:
       - sonar-network
     command: >
-      sh -c "chown -R 0:0 /opt/sonarqube && chmod -R 770 /opt/sonarqube"
+      sh -c "sudo chown -R 0:0 /opt/sonarqube && sudo chmod -R 770 /opt/sonarqube"
     depends_on:
       - postgres
 networks:
