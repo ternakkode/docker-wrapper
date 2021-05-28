@@ -30,6 +30,8 @@ services:
       - sonarqube_temp:/opt/sonarqube/temp
     networks:
       - sonar-network
+    command: >
+      sh -c "chown -R 0:0 /opt/sonarqube && chmod -R 770 /opt/sonarqube"
     depends_on:
       - postgres
 networks:
