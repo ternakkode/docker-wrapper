@@ -62,7 +62,7 @@ services:
       - blibli
   redis-replica:
     image: "bitnami/redis"
-    container_nae: blibli-engagement-redis-replica
+    container_name: blibli-engagement-redis-replica
     environment:
       - REDIS_REPLICATION_MODE=replica
       - REDIS_MASTER_HOST=redis-master
