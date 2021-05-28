@@ -57,7 +57,7 @@ services:
       - REDIS_REPLICATION_MODE=master
       - REDIS_PASSWORD=rahasia123
     ports:
-      - "6379"
+      - '6379:6379'
     networks:
       - blibli
   redis-slave:
@@ -69,7 +69,7 @@ services:
       - REDIS_MASTER_PASSWORD=rahasia123
       - REDIS_PASSWORD=rahasia123
     ports:
-      - "6379"
+      - '6379:6379'
     networks:
       - blibli
     depends_on:
