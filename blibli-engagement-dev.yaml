@@ -67,6 +67,7 @@ services:
       - REDIS_MASTER_HOST=redis
       - REDIS_MASTER_PASSWORD=rahasia123
       - REDIS_ANNOUNCE_IP=52.187.23.103
+      - HOST_IP=52.187.23.103
     ports:
       - '26379:26379'
     networks:
