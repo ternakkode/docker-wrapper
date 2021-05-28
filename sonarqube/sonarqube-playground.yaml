@@ -15,7 +15,7 @@ services:
     networks:
       - sonar-network
   sonarqube:
-    image: sonarqube:lts-community
+    image: sonarqube:8.2-community
     container_name: sonarqube-playground-sonar
     ports:
       - '9000:9000'
