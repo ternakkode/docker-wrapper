@@ -7,6 +7,8 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
       - 2181:2181
+    networks:
+      - blibli
   kafka:
     image: 'bitnami/kafka:1.1.0'
     container_name: blibli-engagement-kafka
@@ -15,14 +17,16 @@ services:
       - '9093:9093'
     environment:
       - KAFKA_BROKER_ID=1
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=52.187.23.103:2181
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
-      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://52.187.23.103:9092,EXTERNAL://52.187.23.103:9093
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_ADVERTISED_LISTENERS=CLIENT://52.187.23.103:9092,EXTERNAL://52.187.23.103:9093
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on: 
       - zookeeper
+    networks:
+      - blibli
   mongodb:
     image: mongo:3.6
     container_name: blibli-engagement-mongo
@@ -31,6 +35,8 @@ services:
       - 27017:27017
     volumes:
       - blibli-engagement-mongodb:/data/db
+    networks:
+      - blibli
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
     container_name: blibli-engagement-elasticsearch
@@ -42,6 +48,8 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx1024m"
     volumes:
       - blibli-engagement-elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - blibli
   redis:
     image: redis:latest
     container_name: blibli-engagement-redis
@@ -49,6 +57,8 @@ services:
       - '6379:6379'
     environment:
       - REDIS_PASSWORD=rahasia123
+    networks:
+      - blibli
   redis-sentinel:
     image: 'bitnami/redis-sentinel:latest'
     container_name: blibli-engagement-redis-sentinel
@@ -57,17 +67,24 @@ services:
       - REDIS_MASTER_PASSWORD=rahasia123
     ports:
       - '26379:26379'
+    networks:
+      - blibli
   postgres:
     image: postgres:latest
     container_name: blibli-engagement-postgres
     ports:
       - '5432:5432'
+    networks:
+      - blibli
     environment:
       - POSTGRES_USER=ternakkode
       - POSTGRES_PASSWORD=rahasia123
       - POSTGRES_DB=blibli-enngagement-dev
     volumes:
       - blibli-engagement-postgres:/var/lib/postgresql/data
+networks:
+    blibli:
+      driver: bridge
 volumes:
     blibli-engagement-mongodb:
       driver: local
