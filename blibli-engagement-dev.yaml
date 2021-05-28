@@ -37,9 +37,6 @@ services:
       - blibli-engagement-mongodb:/data/db
     networks:
       - blibli
-    environment: 
-      MONGO_INITDB_ROOT_USERNAME: ternakkode
-      MONGO_INITDB_ROOT_PASSWORD: rahasia123
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
     container_name: blibli-engagement-elasticsearch
