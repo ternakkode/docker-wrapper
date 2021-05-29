@@ -79,7 +79,7 @@ services:
     environment:
       - POSTGRES_USER=ternakkode
       - POSTGRES_PASSWORD=rahasia123
-      - POSTGRES_DB=blibli-enngagement-dev
+      - POSTGRES_DB=ternakkode
     volumes:
       - blibli-engagement-postgres:/var/lib/postgresql/data
 networks:
